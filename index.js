@@ -9,18 +9,23 @@ async function mainLoop() {
 
         // 1. Obtenemos los próximos mantenimientos
         const datesLastManteinance = await getDatesNextManteinances();
+        // console.log("Datos obtenidos:", datesLastManteinance);
 
         // 2. Filtramos los equipos que tienen un mantenimiento próximo dentro de los 15 o 30 días
         const filteredEquipments = filterEquipments(datesLastManteinance);
+        // console.log("Equipos filtrados:", filteredEquipments);
 
         // 3. Obtenemos los equipos que pertenecen a cada sala
         const roomsEquipments = await getRoomsForEquipments(filteredEquipments);
+        // console.log("Salas filtradas:", roomsEquipments);
 
         // 4. Obtenemos los id de clientes que tienen asignada cada sala
         const clientsObj = await getIdClientsForRoom(roomsEquipments);
+        // console.log("Clientes filtrados:", clientsObj);
 
         // 5. Obtenemos los emails de cada cliente
         const emailsObj = await getEmailsForClients(clientsObj);
+        // console.log("Emails obtenidos:", emailsObj);
 
         // 6. Procesamos y enviamos los emails
         await processAndSendEmails(emailsObj);
