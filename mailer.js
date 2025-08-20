@@ -19,10 +19,6 @@ transporter.verify((error, success) => {
 });
 
 
-console.log("EMAIL:", process.env.EMAIL);
-console.log("PASS length:", process.env.PASS?.length);
-
-
 function createMessage(client) {
     const { room_name, equipments, email } = client;
 
@@ -56,7 +52,7 @@ function createMessage(client) {
 async function sendMail(mail, mensaje) {
     try {
         await transporter.sendMail({
-            from: `"Example Sender" <alertasdmd@gmail.com>`,
+            from: `"Mantenimiento DMD" <mantenimientosdmd@gmail.com>`,
             to: `${mail}`,
             subject: "Mantenimiento Telemetria",
             html: mensaje,
